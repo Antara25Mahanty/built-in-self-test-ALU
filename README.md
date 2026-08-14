@@ -89,7 +89,7 @@ The ALU produces 74 bits of output per cycle across all its functions (8-bit sum
 ## Verification
 
 Simulated in Vivado (XSim), 200 ns test window. The golden signature was captured from a known-good run and confirmed to produce pass=1 on a matching re-run:
-
+![Verified simulation run showing pass=1](verified_re_run.png)
 
 
 
