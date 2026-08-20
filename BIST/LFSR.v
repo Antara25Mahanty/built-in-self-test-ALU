@@ -2,7 +2,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 // Module Name:    LFSR_input
 // Description:    8-bit GALOIS LFSR (Pseudo-Random Pattern Generator, PRPG).
-//                 Feedback taps at bits 1, 4, 5. Seeds to 8'd1 on reset
+//                 Feedback taps at bits 1, 3, 5. Seeds to 8'd1 on reset
 //                 (never 0, since an all-zero seed would stay stuck at 0).
 //////////////////////////////////////////////////////////////////////////////////
 module LFSR_input(
@@ -18,8 +18,8 @@ module LFSR_input(
             q[0]<=q[7];
             q[1]<=q[0]^q[7];
             q[2]<=q[1];
-            q[3]<=q[2];
-            q[4]<=q[3]^q[7];
+            q[3]<=q[2]^q[7];
+            q[4]<=q[3];
             q[5]<=q[4]^q[7];
             q[6]<=q[5];
             q[7]<=q[6];
