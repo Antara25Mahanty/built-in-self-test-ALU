@@ -32,9 +32,9 @@ The ALU produces 74 bits of output per cycle across all its functions (8-bit sum
 
 | File | Description |
 |---|---|
-| `LFSR_input.v` | 8-bit GALOIS -style LFSR with XOR feedback taps at bits 1, 4, and 5. Generates the pseudo-random stimulus applied to the ALU. Seeds to `8'd1` on reset. https://www.ece.unb.ca/tervo/ee4253/polyprime.shtml polynomial x^8 + x^6 + x^5 + x^2 + 1 is primitive|
+| `LFSR_input.v` | 8-bit GALOIS -style LFSR with XOR feedback taps at bits 1, 3, and 5. Generates the pseudo-random stimulus applied to the ALU. Seeds to `8'd1` on reset. https://www.ece.unb.ca/tervo/ee4253/polyprime.shtml polynomial x^8 + x^5 + x^3 + x + 1 is primitive|
 | `CUT_ALU.v` | The Circuit Under Test — an 8-bit ALU computing sum, difference (with carry/borrow), 16-bit product, XOR, XNOR, NAND, and 2-bit logical shifts. Internally instantiates its own `LFSR_input` to source operands each cycle. |
-| `MISR_golden_sign.v` | 74-bit MISR built from `shifter_2` (2-input XOR) and `shifter_3` (3-input XOR, at feedback tap positions 69, 70, 73) cells. Concatenates all ALU outputs into a 74-bit vector each cycle and folds them into the signature register. Internally instantiates its own `CUT_ALU`. |
+| `MISR_golden_sign.v` | 74-bit MISR built from `shifter_2` (2-input XOR) and `shifter_3` (3-input XOR, at feedback tap positions 58, 59, 73) cells. Concatenates all ALU outputs into a 74-bit vector each cycle and folds them into the signature register. Internally instantiates its own `CUT_ALU`. https://docs.amd.com/v/u/en-US/xapp052 |
 | `golden_compare.v` | Compares a live MISR signature against a pre-captured golden signature constant and outputs `pass`. Represents the realistic, production-style approach — a single stored reference value instead of a permanent duplicate CUT on-chip. |
 | `BIST_tb.v` | Top-level testbench. Instantiates the LFSR, the ALU, the MISR, and the comparator, applies a global reset, runs the simulation for 200 ns, and monitors the LFSR output, MISR signature, and pass flag over time. |
 
