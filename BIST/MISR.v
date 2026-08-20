@@ -5,7 +5,7 @@
 //                 Instantiates its own CUT_ALU, concatenates all ALU outputs
 //                 into a 74-bit vector (MISR_in), and compacts it cycle by
 //                 cycle into a single 74-bit signature using an XOR shift
-//                 chain with feedback taps at bit positions 69, 70, and 73.
+//                 chain with feedback taps at bit positions 58, 59, and 73.
 //
 //                 NOTE: this module regenerates a "golden" signature live by
 //                 running its own internal copy of CUT_ALU. This is a valid
@@ -58,7 +58,7 @@ module MISR_golden_sign(
     genvar i;
     generate
     for(i=1;i<=73;i=i+1) begin: gen_loop
-        if(i==69||i==70||i==73) begin:fb_loop
+        if(i==58||i==59||i==73) begin:fb_loop
             // Feedback-tap cells: fold in w1[73] a second time (linear feedback)
             shifter_3 Ci(.a(MISR_in[i]),.b(w1[i-1]),.fb(w1[73]),.c(w1[i]),.clk(clk),.reset(reset));
         end
